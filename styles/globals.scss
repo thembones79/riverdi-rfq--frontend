@@ -1,0 +1,70 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+tbody {
+  display: block;
+  overflow: auto;
+}
+thead,
+tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* even columns width , fix width of table too*/
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.tabs.is-boxed li.is-active a {
+  box-shadow: #63636333 0px 2px 8px 0px;
+}
+
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.56);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.modal-card {
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.fixed200 {
+  max-height: calc(100vh - 200px);
+  overflow: scroll;
+}
+
+.width100percent {
+  width: 100%;
+}
+
+.sticky-navbar {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.full-page {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 150px);
+  justify-content: center;
+  align-items: center;
+}
+
+.max-w-800 {
+  width: 100%;
+  max-width: 800px;
+}
