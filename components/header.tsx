@@ -13,10 +13,11 @@ export const Header = ({ currentUser }: HeaderProps) => {
   const links = [
     !currentUser && { label: "Sign Up", href: "/auth/signup" },
     !currentUser && { label: "Log In", href: "/auth/login" },
-    currentUser && { label: "Banana", href: "/auth/banana" },
+    currentUser && { label: "📋 Banana", href: "/auth/banana" },
+    currentUser && { label: "🎯 New RFQ", href: "/rfqs/new" },
     currentUser && { label: "Users", href: "/users" },
     currentUser && { label: "Users Table", href: "/users/table" },
-    currentUser && { label: "Log Out", href: "/auth/logout" },
+    currentUser && { label: "💔 Log Out", href: "/auth/logout" },
   ]
     .filter((truthyLink) => truthyLink)
     //@ts-ignore
@@ -33,7 +34,14 @@ export const Header = ({ currentUser }: HeaderProps) => {
       <ul>
         <li className={styles.logo}>
           <div className={styles.logo__item}>
-            <Link href="/">Riverdi RFQ</Link>
+            <Link href="/">
+              <span>
+                <span className="icon">
+                  <i className="fas fa-pizza-slice"></i>
+                </span>
+                <span>Riverdi RFQ</span>
+              </span>
+            </Link>
           </div>
         </li>
         {links}
