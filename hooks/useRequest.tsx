@@ -55,5 +55,5 @@ export const useRequest = ({
     }
   };
 
-  return { doRequest, errorsJSX, inputStyle };
+  return { doRequest, errorsJSX, inputStyle, errors };
 };

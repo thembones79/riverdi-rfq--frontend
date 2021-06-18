@@ -4,6 +4,7 @@ import { Header } from "../components/header";
 import { IUser } from "./users";
 import "../styles/bulma.scss";
 import "../styles/globals.scss";
+import "../styles/fontawesome.css";
 
 interface AppWithUser extends AppProps {
   currentUser: IUser;
