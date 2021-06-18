@@ -6,10 +6,10 @@ import { NiceButton } from "../../components/niceButton";
 
 const NewRfq = () => {
   const [eau, setEau] = useState(0);
-  const [customerId, setCustomerId] = useState(1);
-  const [distributorId, setDistributorId] = useState(1);
-  const [pmId, setPmId] = useState(1);
-  const [kamId, setKamId] = useState(1);
+  const [customerId, setCustomerId] = useState(0);
+  const [distributorId, setDistributorId] = useState(0);
+  const [pmId, setPmId] = useState(0);
+  const [kamId, setKamId] = useState(0);
   const { doRequest, errorsJSX, inputStyle } = useRequest({
     url: "/rfqs",
     method: "post",

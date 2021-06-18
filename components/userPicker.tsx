@@ -52,6 +52,7 @@ export const UserPicker: React.FC<UserPickerProps> = ({
           <select
             name={fieldname}
             id={fieldname}
+            required
             onChange={(e) => {
               handleChange(parseInt(e.target.value));
             }}
