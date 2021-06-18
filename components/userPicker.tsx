@@ -56,6 +56,7 @@ export const UserPicker: React.FC<UserPickerProps> = ({
               handleChange(parseInt(e.target.value));
             }}
           >
+            <option></option>
             {renderOptions()}
           </select>
         </div>
