@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Router from "next/router";
+
 import { useRequest } from "../../hooks/useRequest";
 import { by } from "../../utils/by";
 
@@ -16,7 +18,7 @@ export interface IRfq {
 type ColumnType = keyof IRfq;
 type OrderType = "asc" | "desc";
 
-const UsersTable = () => {
+const RfqsTable = () => {
   const [rfqsTable, setRfqsTable] = useState<IRfq[]>([]);
   const [completeRfqsList, setCompleteRfqsList] = useState<IRfq[]>([]);
   const [sortingOrder, setSortingOrder] = useState<OrderType>("asc");
@@ -284,7 +286,7 @@ const UsersTable = () => {
       const { rfq_code, eau, customer, distributor, pm, kam, updated, id } =
         rfq;
       return (
-        <tr key={id}>
+        <tr key={id} onClick={() => Router.push(`/rfqs/${id}`)}>
           <td className="is-200">{rfq_code}</td>
           <td>{eau}</td>
           <td>{customer}</td>
@@ -386,4 +388,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default RfqsTable;
