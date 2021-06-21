@@ -4,32 +4,42 @@ import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../../components/niceButton";
 import { IRequirement } from "./requirements-table";
 
-interface NewRequirementProps {
+interface EditRequirementProps {
+  id: number;
+  idx: number;
   rfq_id: number;
+  oldCnccwr: string;
+  oldRequirement: string;
+  oldNote: string;
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   requirementsTable: IRequirement[];
   setRequirementsTable: React.Dispatch<React.SetStateAction<IRequirement[]>>;
 }
 
-export const NewRequirement: React.FC<NewRequirementProps> = ({
+export const EditRequirement: React.FC<EditRequirementProps> = ({
+  id,
+  idx,
   rfq_id,
+  oldCnccwr,
+  oldRequirement,
+  oldNote,
   setIsModalActive,
   requirementsTable,
   setRequirementsTable,
 }) => {
-  const [cnccwr, setCnccwr] = useState("");
-  const [requirement, setRequirement] = useState("");
-  const [note, setNote] = useState("");
-  const { doRequest, errorsJSX, inputStyle } = useRequest({
-    url: "/requirements",
-    method: "post",
+  const [cnccwr, setCnccwr] = useState(oldCnccwr);
+  const [requirement, setRequirement] = useState(oldRequirement);
+  const [note, setNote] = useState(oldNote);
+  const { doRequest, errorsJSX } = useRequest({
+    url: `/requirements/${id}`,
+    method: "put",
     body: {
       rfq_id,
       c_nc_cwr: cnccwr,
       requirement,
       note,
     },
-    onSuccess: (r: IRequirement) => onSuccessAction(r),
+    onSuccess: (r: IRequirement, idx: number) => onSuccessAction(r, idx),
   });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -43,9 +53,12 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
     setNote("");
   };
 
-  const onSuccessAction = (r: IRequirement) => {
+  const onSuccessAction = (r: IRequirement, idx: number) => {
+    const newTable = [...requirementsTable];
+    delete newTable[idx];
+
     setRequirementsTable([
-      ...requirementsTable,
+      ...newTable,
       {
         id: r.id,
         rfq_id,
@@ -104,7 +117,7 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
 
       {errorsJSX()}
       <div className="m-3 mt-6 ">
-        <NiceButton>Add Requirement</NiceButton>
+        <NiceButton>Save Requirement</NiceButton>
       </div>
     </form>
   );

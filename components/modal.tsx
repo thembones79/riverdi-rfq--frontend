@@ -3,8 +3,9 @@ export interface ModalProps {
   modalBody: JSX.Element;
   isModalActive: boolean;
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
-  modalAction: any;
-  modalActionTitle: string;
+  noFooter?: boolean;
+  modalAction?: any;
+  modalActionTitle?: string;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -12,6 +13,7 @@ export const Modal: React.FC<ModalProps> = ({
   modalBody,
   isModalActive,
   setIsModalActive,
+  noFooter,
   modalAction,
   modalActionTitle,
 }) => {
@@ -23,6 +25,18 @@ export const Modal: React.FC<ModalProps> = ({
     modalAction();
     setIsModalActive(false);
   };
+
+  const renderFooter = () => (
+    <>
+      <button className="button is-success" onClick={handleMainActionClick}>
+        {modalActionTitle}
+      </button>
+      <button className="button" onClick={handleCloseModalClick}>
+        Cancel
+      </button>
+    </>
+  );
+
   return (
     <div className={`modal ${isModalActive && "is-active"}`}>
       <div className="modal-background" onClick={handleCloseModalClick}></div>
@@ -37,12 +51,7 @@ export const Modal: React.FC<ModalProps> = ({
         </header>
         <section className="modal-card-body">{modalBody}</section>
         <footer className="modal-card-foot">
-          <button className="button is-success" onClick={handleMainActionClick}>
-            {modalActionTitle}
-          </button>
-          <button className="button" onClick={handleCloseModalClick}>
-            Cancel
-          </button>
+          {!noFooter && renderFooter()}
         </footer>
       </div>
     </div>
