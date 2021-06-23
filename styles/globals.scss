@@ -22,9 +22,22 @@ tr {
   width: 100%;
   table-layout: fixed; /* even columns width , fix width of table too*/
 }
+td {
+  vertical-align: middle !important;
+}
 
 * {
   box-sizing: border-box;
+}
+
+.button.is-link.is-inverted {
+  background-color: transparent;
+  color: #3273dc;
+}
+
+.button.is-danger.is-inverted {
+  background-color: transparent;
+  color: #f14668;
 }
 
 .tabs.is-boxed li.is-active a {
@@ -69,6 +82,22 @@ tr {
   max-width: 800px;
 }
 
+.is-400 {
+  width: 400px;
+}
+
 .is-200 {
   width: 200px;
+}
+
+.is-120 {
+  width: 120px;
+}
+
+.is-100 {
+  width: 100px;
+}
+
+.is-50 {
+  width: 50px;
 }
