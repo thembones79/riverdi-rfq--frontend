@@ -99,6 +99,22 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
     idx,
     rfq_id,
   }: IHandleEditReq) => {
+    const pupa = () => {
+      return (
+        <EditRequirement
+          rfq_id={rfq_id}
+          setIsModalActive={setIsModalActive}
+          requirementsTable={requirementsTable}
+          setRequirementsTable={setRequirementsTable}
+          id={id}
+          idx={idx}
+          oldCnccwr={c_nc_cwr}
+          oldRequirement={requirement}
+          oldNote={note}
+        />
+      );
+    };
+
     setModalBody(
       <EditRequirement
         rfq_id={rfq_id}

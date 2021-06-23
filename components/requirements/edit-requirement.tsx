@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../../components/niceButton";
@@ -27,9 +27,9 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
   requirementsTable,
   setRequirementsTable,
 }) => {
-  const [cnccwr, setCnccwr] = useState(oldCnccwr);
-  const [requirement, setRequirement] = useState(oldRequirement);
-  const [note, setNote] = useState(oldNote);
+  const [cnccwr, setCnccwr] = useState("oldCnccwr");
+  const [requirement, setRequirement] = useState("oldRequirement");
+  const [note, setNote] = useState("oldNote");
   const { doRequest, errorsJSX } = useRequest({
     url: `/requirements/${id}`,
     method: "put",
@@ -39,7 +39,7 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
       requirement,
       note,
     },
-    onSuccess: (r: IRequirement, idx: number) => onSuccessAction(r, idx),
+    onSuccess: (r: IRequirement) => onSuccessAction(r, idx),
   });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -54,8 +54,11 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
   };
 
   const onSuccessAction = (r: IRequirement, idx: number) => {
-    const newTable = [...requirementsTable];
-    delete newTable[idx];
+    console.log({ r, idx });
+
+    let newTable = [...requirementsTable];
+
+    newTable.splice(idx, 1);
 
     setRequirementsTable([
       ...newTable,
@@ -67,9 +70,17 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
         note,
       },
     ]);
+
     resetForm();
     setIsModalActive(false);
   };
+
+  useEffect(() => {
+    setCnccwr(oldCnccwr);
+    setRequirement(() => oldRequirement);
+    setNote(oldNote);
+    console.log({ oldCnccwr, oldRequirement, oldNote });
+  }, [id]);
 
   return (
     <form onSubmit={onSubmit}>
