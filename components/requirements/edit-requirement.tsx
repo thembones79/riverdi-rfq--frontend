@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Router from "next/router";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../../components/niceButton";
 import { IRequirement } from "./requirements-table";
@@ -54,8 +53,6 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
   };
 
   const onSuccessAction = (r: IRequirement, idx: number) => {
-    console.log({ r, idx });
-
     let newTable = [...requirementsTable];
 
     newTable.splice(idx, 1);

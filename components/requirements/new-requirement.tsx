@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Router from "next/router";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../../components/niceButton";
 import { IRequirement } from "./requirements-table";
@@ -35,6 +34,11 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await doRequest();
+  };
+
+  const onCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    setIsModalActive(false);
   };
 
   const resetForm = () => {
@@ -105,6 +109,10 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
       {errorsJSX()}
       <div className="m-3 mt-6 ">
         <NiceButton>Add Requirement</NiceButton>
+        <span className="m-3"></span>
+        <NiceButton color="cancel" onClick={(event) => onCancel(event)}>
+          Cancel
+        </NiceButton>
       </div>
     </form>
   );

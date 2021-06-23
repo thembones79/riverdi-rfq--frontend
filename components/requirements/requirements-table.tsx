@@ -3,6 +3,7 @@ import { useRequest } from "../../hooks/useRequest";
 import { Modal } from "../modal";
 import { NewRequirement } from "./new-requirement";
 import { EditRequirement } from "./edit-requirement";
+import { DeleteRequirement } from "./delete-requirement";
 
 export interface IRequirement {
   id: number;
@@ -17,6 +18,11 @@ export interface RequirementsTableProps {
 }
 
 interface IHandleEditReq extends IRequirement {
+  idx: number;
+}
+
+interface IHandleDeleteReq {
+  id: number;
   idx: number;
 }
 
@@ -82,7 +88,12 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
             >
               <i className="fas fa-edit"></i>
             </button>
-            <button className="button is-danger is-inverted  is-rounded is-small mx-1 p-3">
+            <button
+              onClick={() => {
+                handleDeleteReq({ id, idx });
+              }}
+              className="button is-danger is-inverted  is-rounded is-small mx-1 p-3"
+            >
               <i className="fas fa-trash-alt"></i>
             </button>
           </td>
@@ -99,22 +110,6 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
     idx,
     rfq_id,
   }: IHandleEditReq) => {
-    const pupa = () => {
-      return (
-        <EditRequirement
-          rfq_id={rfq_id}
-          setIsModalActive={setIsModalActive}
-          requirementsTable={requirementsTable}
-          setRequirementsTable={setRequirementsTable}
-          id={id}
-          idx={idx}
-          oldCnccwr={c_nc_cwr}
-          oldRequirement={requirement}
-          oldNote={note}
-        />
-      );
-    };
-
     setModalBody(
       <EditRequirement
         rfq_id={rfq_id}
@@ -145,6 +140,22 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
     );
 
     setModalTitle("New Requirement");
+
+    setIsModalActive(true);
+  };
+
+  const handleDeleteReq = ({ id, idx }: IHandleDeleteReq) => {
+    setModalBody(
+      <DeleteRequirement
+        setIsModalActive={setIsModalActive}
+        requirementsTable={requirementsTable}
+        setRequirementsTable={setRequirementsTable}
+        id={id}
+        idx={idx}
+      />
+    );
+
+    setModalTitle("Delete Requirement");
 
     setIsModalActive(true);
   };
