@@ -46,6 +46,11 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
     await doRequest();
   };
 
+  const onCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    setIsModalActive(false);
+  };
+
   const resetForm = () => {
     setCnccwr("");
     setRequirement("");
@@ -125,7 +130,14 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
 
       {errorsJSX()}
       <div className="m-3 mt-6 ">
-        <NiceButton>Save Requirement</NiceButton>
+        <NiceButton>
+          <i className="far fa-save"></i>
+          <span className="m-1"></span> Save Requirement
+        </NiceButton>
+        <span className="m-3"></span>
+        <NiceButton color="cancel" onClick={(event) => onCancel(event)}>
+          Cancel
+        </NiceButton>
       </div>
     </form>
   );

@@ -108,7 +108,10 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
 
       {errorsJSX()}
       <div className="m-3 mt-6 ">
-        <NiceButton>Add Requirement</NiceButton>
+        <NiceButton>
+          <i className="far fa-check-circle"></i>
+          <span className="m-1"></span> Add Requirement
+        </NiceButton>
         <span className="m-3"></span>
         <NiceButton color="cancel" onClick={(event) => onCancel(event)}>
           Cancel

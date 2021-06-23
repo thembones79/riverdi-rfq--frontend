@@ -3,6 +3,7 @@ import { useRequest } from "../../hooks/useRequest";
 import { Modal } from "../modal";
 import { NewRequirement } from "./new-requirement";
 import { EditRequirement } from "./edit-requirement";
+import { NiceButton } from "../../components/niceButton";
 import { DeleteRequirement } from "./delete-requirement";
 
 export interface IRequirement {
@@ -166,7 +167,13 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
 
   return (
     <div className="table-container">
-      <button onClick={handleNewReq}>New Requirement</button>
+      <div className="my-5">
+        <NiceButton onClick={handleNewReq}>
+          <i className="far fa-check-circle"></i>
+          <span className="m-1"></span> New Requirement
+        </NiceButton>
+      </div>
+
       <table className="table is-narrow is-striped is-hoverable is-fullwidth is-size-7">
         <thead>
           <tr>{renderTableHeader()}</tr>

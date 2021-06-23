@@ -28,6 +28,11 @@ export const DeleteRequirement: React.FC<DeleteRequirementProps> = ({
     await doRequest();
   };
 
+  const onCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    setIsModalActive(false);
+  };
+
   const onSuccessAction = () => {
     let newTable = [...requirementsTable];
     newTable.splice(idx, 1);
@@ -45,7 +50,12 @@ export const DeleteRequirement: React.FC<DeleteRequirementProps> = ({
       </div>
       <div className="m-3 mt-6 ">
         <NiceButton color="danger" onClick={() => onClick()}>
-          <i className="far fa-trash-alt"></i> Delete Requirement
+          <i className="far fa-trash-alt"></i>
+          <span className="m-1"></span> Delete Requirement
+        </NiceButton>
+        <span className="m-3"></span>
+        <NiceButton color="cancel" onClick={(event) => onCancel(event)}>
+          Cancel
         </NiceButton>
       </div>
       {errorsJSX()}
