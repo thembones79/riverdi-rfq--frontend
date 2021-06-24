@@ -60,18 +60,15 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
   const onSuccessAction = (r: IRequirement, idx: number) => {
     let newTable = [...requirementsTable];
 
-    newTable.splice(idx, 1);
+    newTable[idx] = {
+      id: r.id,
+      rfq_id,
+      c_nc_cwr: cnccwr,
+      requirement,
+      note,
+    };
 
-    setRequirementsTable([
-      ...newTable,
-      {
-        id: r.id,
-        rfq_id,
-        c_nc_cwr: cnccwr,
-        requirement,
-        note,
-      },
-    ]);
+    setRequirementsTable(newTable);
 
     resetForm();
     setIsModalActive(false);

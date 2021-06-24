@@ -53,6 +53,15 @@ td {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
+.title.is-4 {
+  font-weight: 900;
+  color: #23539e;
+}
+
+.table.is-narrow th {
+  padding: 0.5em 0.8em;
+}
+
 .fixed200 {
   max-height: calc(100vh - 200px);
   overflow: scroll;

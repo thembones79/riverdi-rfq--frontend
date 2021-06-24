@@ -24,7 +24,7 @@ export const DeleteRequirement: React.FC<DeleteRequirementProps> = ({
     onSuccess: () => onSuccessAction(),
   });
 
-  const onClick = async () => {
+  const deleteReq = async () => {
     await doRequest();
   };
 
@@ -49,7 +49,7 @@ export const DeleteRequirement: React.FC<DeleteRequirementProps> = ({
         <div> Are you really sure you want to do this?</div>
       </div>
       <div className="m-3 mt-6 ">
-        <NiceButton color="danger" onClick={() => onClick()}>
+        <NiceButton color="danger" onClick={() => deleteReq()}>
           <i className="far fa-trash-alt"></i>
           <span className="m-1"></span> Delete Requirement
         </NiceButton>
