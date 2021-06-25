@@ -167,19 +167,20 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
 
   return (
     <div className="table-container">
-      <div className="my-5">
+      <div className="mx-5 mt-2 mb-5">
         <NiceButton onClick={handleNewReq}>
           <i className="far fa-check-circle"></i>
           <span className="m-1"></span> New Requirement
         </NiceButton>
+
+        <table className="table is-narrow is-striped is-hoverable is-fullwidth is-size-7 mt-5">
+          <thead>
+            <tr>{renderTableHeader()}</tr>
+          </thead>
+          <tbody className="fixed200 ">{renderTableBody()}</tbody>
+        </table>
       </div>
 
-      <table className="table is-narrow is-striped is-hoverable is-fullwidth is-size-7">
-        <thead>
-          <tr>{renderTableHeader()}</tr>
-        </thead>
-        <tbody className="fixed200 ">{renderTableBody()}</tbody>
-      </table>
       {errorsJSX()}
       <Modal
         modalTitle={modalTitle}

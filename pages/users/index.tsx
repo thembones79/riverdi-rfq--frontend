@@ -40,15 +40,16 @@ const UsersList = ({ currentUser }: UsersListProps) => {
       );
     });
   };
-  useEffect(() => {
-    doRequest();
-  }, []);
 
   useEffect(() => {
     if (!currentUser) {
-      Router.push("/auth/login");
+      Router.push("/");
     }
   });
+
+  useEffect(() => {
+    doRequest();
+  }, []);
 
   return currentUser ? (
     <div>

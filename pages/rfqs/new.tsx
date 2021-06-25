@@ -33,7 +33,7 @@ const NewRfq = () => {
       <div className="card max-w-800 m-3">
         <div className="card-content">
           <form onSubmit={onSubmit}>
-            <h1 className="title m-3">🎯 New RFQ</h1>
+            <h1 className="title m-3 mb-5">🎯 New RFQ</h1>
             <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
               <div className="field m-3">
                 <label className="label">EAU</label>
@@ -76,7 +76,10 @@ const NewRfq = () => {
 
             {errorsJSX()}
             <div className="m-3 mt-6 ">
-              <NiceButton>Add RFQ</NiceButton>
+              <NiceButton>
+                <i className="far fa-check-circle"></i>
+                <span className="m-1"></span> Add RFQ
+              </NiceButton>
             </div>
           </form>
         </div>

@@ -25,7 +25,7 @@ const Login = () => {
       <div className="card max-w-800 m-3">
         <div className="card-content">
           <form onSubmit={onSubmit}>
-            <h1 className="title m-3">Log In 🔐</h1>
+            <h1 className="title m-3">🔐 Log In </h1>
 
             <div className="field m-3">
               <label className="label">Email Address</label>

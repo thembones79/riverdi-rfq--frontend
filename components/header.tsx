@@ -10,13 +10,14 @@ interface HeaderProps {
 export const Header = ({ currentUser }: HeaderProps) => {
   const router = useRouter();
 
+  const isAdmin = currentUser?.role_id === 1;
+
   const links = [
-    !currentUser && { label: "Sign Up", href: "/auth/signup" },
-    !currentUser && { label: "Log In", href: "/auth/login" },
+    !currentUser && { label: "🔐 Log In", href: "/auth/login" },
     currentUser && { label: "📋 RFQs", href: "/rfqs" },
     currentUser && { label: "🎯 New RFQ", href: "/rfqs/new" },
-    currentUser && { label: "Users", href: "/users" },
-    currentUser && { label: "Users Table", href: "/users/table" },
+    currentUser && isAdmin && { label: "👤 Users", href: "/users" },
+    currentUser && isAdmin && { label: "Users Table", href: "/users/table" },
     currentUser && { label: "💔 Log Out", href: "/auth/logout" },
   ]
     .filter((truthyLink) => truthyLink)
@@ -36,6 +37,7 @@ export const Header = ({ currentUser }: HeaderProps) => {
           <div className={styles.logo__item}>
             <Link href="/">
               <span>
+                <span className="mx-1"></span>
                 <span className="icon">
                   <i className="fas fa-pizza-slice"></i>
                 </span>

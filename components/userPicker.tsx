@@ -15,6 +15,7 @@ export interface UserPickerProps {
   label: string;
   fieldname: string;
   fetch: string;
+  initialValue?: number;
 }
 
 export const UserPicker: React.FC<UserPickerProps> = ({
@@ -22,6 +23,7 @@ export const UserPicker: React.FC<UserPickerProps> = ({
   label,
   fieldname,
   fetch,
+  initialValue,
 }) => {
   const [usersList, setUsersList] = useState<IOptionalUser[]>([]);
   const { doRequest, errorsJSX, errors } = useRequest({
@@ -52,6 +54,7 @@ export const UserPicker: React.FC<UserPickerProps> = ({
           <select
             name={fieldname}
             id={fieldname}
+            value={initialValue}
             required
             onChange={(e) => {
               handleChange(parseInt(e.target.value));
