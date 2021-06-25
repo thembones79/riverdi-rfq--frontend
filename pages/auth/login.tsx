@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
+import { NiceButton } from "../../components/niceButton";
 import { useRequest } from "../../hooks/useRequest";
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
       <div className="card max-w-800 m-3">
         <div className="card-content">
           <form onSubmit={onSubmit}>
-            <h1 className="title m-3">🔐 Log In </h1>
+            <h1 className="title m-3 mb-5">🔐 Log In </h1>
 
             <div className="field m-3">
               <label className="label">Email Address</label>
@@ -48,8 +49,12 @@ const Login = () => {
             </div>
 
             {errorsJSX()}
-
-            <button className="button is-link  m-3 ">Log In</button>
+            <div className="mx-3 mt-6">
+              <NiceButton>
+                <i className="fas fa-sign-in-alt"></i>
+                <span className="m-1"></span> Log In
+              </NiceButton>
+            </div>
           </form>
         </div>
       </div>
