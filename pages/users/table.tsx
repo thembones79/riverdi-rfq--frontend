@@ -6,6 +6,8 @@ export interface IUser {
   id: number;
   email: string;
   username: string;
+  shortname: string;
+  role_id: number;
 }
 
 type ColumnType = keyof IUser;

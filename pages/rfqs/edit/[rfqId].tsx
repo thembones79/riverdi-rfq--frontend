@@ -2,6 +2,7 @@ import type { AppContext } from "next/app";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { UserPicker } from "../../../components/userPicker";
+import { IUser } from "../../users";
 import { NiceButton } from "../../../components/niceButton";
 import { useRequest } from "../../../hooks/useRequest";
 import { ssrRequest } from "../../../api/ssr-request";
@@ -16,9 +17,10 @@ interface IRfqWithIds extends IRfq {
 
 interface EditRfqProps {
   rfq: IRfqWithIds;
+  currentUser: IUser;
 }
 
-const EditRfq = ({ rfq }: EditRfqProps) => {
+const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
@@ -48,12 +50,18 @@ const EditRfq = ({ rfq }: EditRfqProps) => {
       await doRequest();
     };
 
+    useEffect(() => {
+      if (!currentUser) {
+        Router.push("/");
+      }
+    });
+
     return (
       <div className="full-page">
         <div className="card max-w-800 m-3">
           <div className="card-content">
             <form onSubmit={onSubmit}>
-              <h1 className="title m-3">Edit {rfq_code}</h1>
+              <h1 className="title m-3 mb-5 is-4">Edit {rfq_code}</h1>
               <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
                 <div className="field m-3">
                   <label className="label">EAU</label>

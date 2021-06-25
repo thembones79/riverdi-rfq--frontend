@@ -78,7 +78,6 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
     setCnccwr(oldCnccwr);
     setRequirement(() => oldRequirement);
     setNote(oldNote);
-    console.log({ oldCnccwr, oldRequirement, oldNote });
   }, [id]);
 
   return (

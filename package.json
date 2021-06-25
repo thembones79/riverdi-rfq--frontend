@@ -1,6 +1,6 @@
 {
   "name": "riverdi-rfq--frontend",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "description": "Frontend written in React Next.js, Typescript for Rivedi RFQ system",
   "private": true,
   "scripts": {
