@@ -20,7 +20,7 @@ const NewRfq = () => {
       pm_id: pmId,
       kam_id: kamId,
     },
-    onSuccess: () => Router.push("/"),
+    onSuccess: () => Router.push("/rfqs"),
   });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
