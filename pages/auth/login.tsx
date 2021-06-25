@@ -49,7 +49,7 @@ const Login = () => {
             </div>
 
             {errorsJSX()}
-            <div className="mx-3 mt-6">
+            <div className="mx-3 mt-6 mb-4">
               <NiceButton>
                 <i className="fas fa-sign-in-alt"></i>
                 <span className="m-1"></span> Log In
