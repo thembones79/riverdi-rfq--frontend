@@ -34,7 +34,7 @@ const Home = ({ currentUser, guiVersion, apiVersion }: HomeProps) => {
         <p>
           Changelog: GUI{" "}
           <a
-            href="https://github.com/thembones79/riverdi-rfq--frontend/main/CHANGELOG.md#changelog"
+            href="https://github.com/thembones79/riverdi-rfq--frontend/blob/main/CHANGELOG.md#changelog"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -42,7 +42,7 @@ const Home = ({ currentUser, guiVersion, apiVersion }: HomeProps) => {
           </a>
           , API{" "}
           <a
-            href="https://github.com/thembones79/riverdi-rfq--backend/master/CHANGELOG.md#changelog"
+            href="https://github.com/thembones79/riverdi-rfq--backend/blob/master/CHANGELOG.md#changelog"
             target="_blank"
             rel="noopener noreferrer"
           >
