@@ -1,0 +1,54 @@
+import React, { useState } from "react";
+import Router from "next/router";
+import { useRequest } from "../../hooks/useRequest";
+import { NiceButton } from "../../components/nice-button";
+
+const NewDistributor = () => {
+  const [name, setName] = useState("");
+  const { doRequest, errorsJSX, inputStyle } = useRequest({
+    url: "/distributors",
+    method: "post",
+    body: {
+      name,
+    },
+    onSuccess: () => Router.push("/distributors"),
+  });
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await doRequest();
+  };
+
+  return (
+    <div className="full-page">
+      <div className="card max-w-800 m-3">
+        <div className="card-content">
+          <form onSubmit={onSubmit}>
+            <h1 className="title m-3 mb-5 is-4">New Distributor</h1>
+            <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
+              <div className="field m-3">
+                <label className="label">Distributor Name</label>
+                <input
+                  className={inputStyle("name")}
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {errorsJSX()}
+            <div className="m-3 mt-6 ">
+              <NiceButton>
+                <i className="far fa-check-circle"></i>
+                <span className="m-1"></span> Add Distributor
+              </NiceButton>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NewDistributor;

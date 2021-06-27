@@ -1,9 +1,9 @@
 import type { AppContext } from "next/app";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-import { UserPicker } from "../../../components/userPicker";
+import { UserPicker } from "../../../components/user-picker";
 import { IUser } from "../../users";
-import { NiceButton } from "../../../components/niceButton";
+import { NiceButton } from "../../../components/nice-button";
 import { useRequest } from "../../../hooks/useRequest";
 import { ssrRequest } from "../../../api/ssr-request";
 import { IRfq } from "../";
@@ -21,6 +21,12 @@ interface EditRfqProps {
 }
 
 const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
@@ -49,12 +55,6 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
       event.preventDefault();
       await doRequest();
     };
-
-    useEffect(() => {
-      if (!currentUser) {
-        Router.push("/");
-      }
-    });
 
     return (
       <div className="full-page">

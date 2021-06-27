@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Router from "next/router";
 import { useRequest } from "../../hooks/useRequest";
-import { UserPicker } from "../../components/userPicker";
-import { NiceButton } from "../../components/niceButton";
+import { UserPicker } from "../../components/user-picker";
+import { NiceButton } from "../../components/nice-button";
+import { IRfq } from "./";
 
 const NewRfq = () => {
   const [eau, setEau] = useState(0);
@@ -20,7 +21,7 @@ const NewRfq = () => {
       pm_id: pmId,
       kam_id: kamId,
     },
-    onSuccess: () => Router.push("/rfqs"),
+    onSuccess: (rfq: IRfq) => Router.push(`/rfqs/${rfq.id}`),
   });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

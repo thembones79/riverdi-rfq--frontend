@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
-import { NiceButton } from "../../components/niceButton";
+import { NiceButton } from "../../components/nice-button";
 import { useRequest } from "../../hooks/useRequest";
 
 const Login = () => {
