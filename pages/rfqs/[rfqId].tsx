@@ -25,6 +25,10 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
     }
   });
 
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {

@@ -43,9 +43,9 @@ const EditDistributor = ({
       await doRequest();
     };
 
-    return (
+    return currentUser ? (
       <div className="full-page">
-        <div className="card max-w-800 m-3">
+        <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <form onSubmit={onSubmit}>
               <h1 className="title m-3 mb-5 is-4">Edit Distributor</h1>
@@ -56,6 +56,7 @@ const EditDistributor = ({
                     className={inputStyle("name")}
                     type="text"
                     value={newName}
+                    required
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -79,6 +80,8 @@ const EditDistributor = ({
           </div>
         </div>
       </div>
+    ) : (
+      <div></div>
     );
   }
 };

@@ -1,6 +1,7 @@
 import type { AppContext } from "next/app";
-import React from "react";
+import React, { useEffect } from "react";
 import Router from "next/router";
+import { IUser } from "../../users";
 import { NiceButton } from "../../../components/nice-button";
 import { useRequest } from "../../../hooks/useRequest";
 import { ssrRequest } from "../../../api/ssr-request";
@@ -15,9 +16,20 @@ interface IRfqWithIds extends IRfq {
 
 interface DeleteRfqProps {
   rfq: IRfqWithIds;
+  currentUser: IUser;
 }
 
-const DeleteRfq = ({ rfq }: DeleteRfqProps) => {
+const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
@@ -35,7 +47,7 @@ const DeleteRfq = ({ rfq }: DeleteRfqProps) => {
 
     return (
       <div className="full-page">
-        <div className="card max-w-800 m-3">
+        <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <h1 className="title m-3">Delete {rfq_code}?</h1>
             <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">

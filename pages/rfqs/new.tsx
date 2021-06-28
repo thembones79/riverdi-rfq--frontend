@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { useRequest } from "../../hooks/useRequest";
 import { UserPicker } from "../../components/user-picker";
 import { NiceButton } from "../../components/nice-button";
+import { IUser } from "../users";
 import { IRfq } from "./";
 
-const NewRfq = () => {
+interface NewRfqProps {
+  currentUser: IUser;
+}
+
+const NewRfq = ({ currentUser }: NewRfqProps) => {
+  useEffect(() => {
+    console.log({ currentUser });
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   const [eau, setEau] = useState(0);
   const [customerId, setCustomerId] = useState(0);
   const [distributorId, setDistributorId] = useState(0);
@@ -31,7 +47,7 @@ const NewRfq = () => {
 
   return (
     <div className="full-page">
-      <div className="card max-w-800 m-3">
+      <div className="card max-w-800 m-3 big-shadow">
         <div className="card-content">
           <form onSubmit={onSubmit}>
             <h1 className="title m-3 mb-5">🎯 New RFQ</h1>

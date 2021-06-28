@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import { IUser } from "../users";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../../components/nice-button";
 
-const NewDistributor = () => {
+interface NewDistributorProps {
+  currentUser: IUser;
+}
+
+const NewDistributor: React.FC<NewDistributorProps> = ({ currentUser }) => {
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
   const [name, setName] = useState("");
   const { doRequest, errorsJSX, inputStyle } = useRequest({
     url: "/distributors",
@@ -19,9 +30,9 @@ const NewDistributor = () => {
     await doRequest();
   };
 
-  return (
+  return currentUser ? (
     <div className="full-page">
-      <div className="card max-w-800 m-3">
+      <div className="card max-w-800 m-3  big-shadow">
         <div className="card-content">
           <form onSubmit={onSubmit}>
             <h1 className="title m-3 mb-5 is-4">New Distributor</h1>
@@ -32,6 +43,7 @@ const NewDistributor = () => {
                   className={inputStyle("name")}
                   type="text"
                   value={name}
+                  required
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -48,6 +60,8 @@ const NewDistributor = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 };
 

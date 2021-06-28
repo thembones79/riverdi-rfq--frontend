@@ -23,7 +23,7 @@ const Login = () => {
 
   return (
     <div className="full-page">
-      <div className="card max-w-800 m-3">
+      <div className="card max-w-800 m-3 big-shadow">
         <div className="card-content">
           <form onSubmit={onSubmit}>
             <h1 className="title m-3 mb-5">🔐 Log In </h1>
@@ -34,6 +34,7 @@ const Login = () => {
                 className={inputStyle("email")}
                 type="text"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -44,6 +45,7 @@ const Login = () => {
                 className={inputStyle("password")}
                 type="password"
                 value={password}
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>

@@ -27,6 +27,10 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
     }
   });
 
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
@@ -58,7 +62,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
 
     return (
       <div className="full-page">
-        <div className="card max-w-800 m-3">
+        <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <form onSubmit={onSubmit}>
               <h1 className="title m-3 mb-5 is-4">Edit {rfq_code}</h1>

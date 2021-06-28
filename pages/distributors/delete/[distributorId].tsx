@@ -22,6 +22,10 @@ const DeleteDistributor = ({
     }
   });
 
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   if (!distributor) {
     return <h1>Distributor not found</h1>;
   } else {
@@ -39,7 +43,7 @@ const DeleteDistributor = ({
 
     return (
       <div className="full-page">
-        <div className="card max-w-800 m-3">
+        <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <h1 className="title m-3">Delete Distributor?</h1>
             <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">

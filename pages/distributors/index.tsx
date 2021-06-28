@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import { IUser } from "../users";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../../components/nice-button";
 
@@ -8,7 +9,19 @@ export interface IDistributor {
   name: string;
 }
 
-const DistributorsTable: React.FC = () => {
+interface DistributorsTableProps {
+  currentUser: IUser;
+}
+
+const DistributorsTable: React.FC<DistributorsTableProps> = ({
+  currentUser,
+}) => {
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
   const [distributorsTable, setDistributorsTable] = useState<IDistributor[]>(
     []
   );
@@ -60,7 +73,7 @@ const DistributorsTable: React.FC = () => {
     doRequest();
   }, []);
 
-  return (
+  return currentUser ? (
     <div className="table-container">
       <div className="mx-5 mt-2 mb-5">
         <NiceButton onClick={handleNewDist}>
@@ -81,6 +94,8 @@ const DistributorsTable: React.FC = () => {
 
       {errorsJSX()}
     </div>
+  ) : (
+    <div></div>
   );
 };
 
