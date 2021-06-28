@@ -51,13 +51,30 @@ td {
   backdrop-filter: saturate(180%) blur(20px);
 }
 
+.card {
+  border-radius: 10px;
+}
+
 .modal-card {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 10px;
+}
+
+.big-shadow {
+  box-shadow: 0 0.5em 1em -0.125em #0a0a0a1a, 0 0 0 1px #0a0a0a05,
+    0 1.9px 4.6px #00000005, 0 4.3px 13.6px #0000000a, 0 7.6px 16.3px #0000000a,
+    0 12px 20px #0000000d, 0 18.5px 25.5px #0000000f, 0 28.9px 24.1px #00000012,
+    0 48px 60px #00000014, 0 96px 120px #0000001a;
 }
 
 .title.is-4 {
   font-weight: 900;
-  color: #7a7a7a;
+  background-color: #6e6e6e;
+  color: transparent;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.59);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
 }
 
 .table.is-narrow th {

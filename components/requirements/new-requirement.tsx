@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRequest } from "../../hooks/useRequest";
-import { NiceButton } from "../../components/niceButton";
+import { NiceButton } from "../nice-button";
 import { IRequirement } from "./requirements-table";
 
 interface NewRequirementProps {

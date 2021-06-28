@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-
+import { IUser } from "../users";
 import { useRequest } from "../../hooks/useRequest";
 import { by } from "../../utils/by";
+
+interface RfqsTableProps {
+  currentUser: IUser;
+}
 
 export interface IRfq {
   id: number;
@@ -18,7 +22,18 @@ export interface IRfq {
 type ColumnType = keyof IRfq;
 type OrderType = "asc" | "desc";
 
-const RfqsTable = () => {
+const RfqsTable = ({ currentUser }: RfqsTableProps) => {
+  useEffect(() => {
+    console.log({ currentUser });
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   const [rfqsTable, setRfqsTable] = useState<IRfq[]>([]);
   const [completeRfqsList, setCompleteRfqsList] = useState<IRfq[]>([]);
   const [sortingOrder, setSortingOrder] = useState<OrderType>("asc");

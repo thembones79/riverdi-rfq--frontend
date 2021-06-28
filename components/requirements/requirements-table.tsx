@@ -3,7 +3,7 @@ import { useRequest } from "../../hooks/useRequest";
 import { Modal } from "../modal";
 import { NewRequirement } from "./new-requirement";
 import { EditRequirement } from "./edit-requirement";
-import { NiceButton } from "../../components/niceButton";
+import { NiceButton } from "../nice-button";
 import { DeleteRequirement } from "./delete-requirement";
 
 export interface IRequirement {

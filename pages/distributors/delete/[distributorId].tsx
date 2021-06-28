@@ -5,21 +5,17 @@ import { IUser } from "../../users";
 import { NiceButton } from "../../../components/nice-button";
 import { useRequest } from "../../../hooks/useRequest";
 import { ssrRequest } from "../../../api/ssr-request";
-import { IRfq } from "../";
+import { IDistributor } from "../";
 
-interface IRfqWithIds extends IRfq {
-  customer_id: number;
-  distributor_id: number;
-  pm_id: number;
-  kam_id: number;
-}
-
-interface DeleteRfqProps {
-  rfq: IRfqWithIds;
+interface DeleteDistributorProps {
+  distributor: IDistributor;
   currentUser: IUser;
 }
 
-const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
+const DeleteDistributor = ({
+  distributor,
+  currentUser,
+}: DeleteDistributorProps) => {
   useEffect(() => {
     if (!currentUser) {
       Router.push("/");
@@ -30,18 +26,18 @@ const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
     return <div></div>;
   }
 
-  if (!rfq) {
-    return <h1>RFQ not found</h1>;
+  if (!distributor) {
+    return <h1>Distributor not found</h1>;
   } else {
-    const { rfq_code, id } = rfq;
+    const { id } = distributor;
 
     const { doRequest, errorsJSX } = useRequest({
-      url: `/rfqs/${id}`,
+      url: `/distributors/${id}`,
       method: "delete",
-      onSuccess: () => Router.push(`/rfqs`),
+      onSuccess: () => Router.push(`/distributors`),
     });
 
-    const deleteRfq = async () => {
+    const deleteDistributor = async () => {
       await doRequest();
     };
 
@@ -49,11 +45,11 @@ const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
       <div className="full-page">
         <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
-            <h1 className="title m-3">Delete {rfq_code}?</h1>
+            <h1 className="title m-3">Delete Distributor?</h1>
             <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
               <div className="m-3">
                 <div>
-                  You are going to <b>delete</b> this RFQ!
+                  You are going to <b>delete</b> this distributor!
                 </div>
                 <div> Are you really sure you want to do this?</div>
               </div>
@@ -61,15 +57,15 @@ const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
 
             {errorsJSX()}
             <div className="m-3 mt-6 ">
-              <NiceButton color="danger" onClick={deleteRfq}>
+              <NiceButton color="danger" onClick={deleteDistributor}>
                 <i className="far fa-trash-alt"></i>
                 <span className="m-1"></span> Yes, I'm 100% sure. Delete this
-                RFQ
+                guy
               </NiceButton>
               <span className="m-3"></span>
               <NiceButton
                 color="cancel"
-                onClick={() => Router.push(`/rfqs/${id}`)}
+                onClick={() => Router.push(`/distributors`)}
               >
                 No. I was wrong. Take me back, please
               </NiceButton>
@@ -81,11 +77,11 @@ const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
   }
 };
 
-DeleteRfq.getInitialProps = async (ctx: AppContext["ctx"]) => {
-  const { rfqId } = ctx.query;
-  const url = `/rfqs/${rfqId}`;
+DeleteDistributor.getInitialProps = async (ctx: AppContext["ctx"]) => {
+  const { distributorId } = ctx.query;
+  const url = `/distributors/${distributorId}`;
   const { data } = await ssrRequest(ctx, url);
-  return { rfq: data };
+  return { distributor: data };
 };
 
-export default DeleteRfq;
+export default DeleteDistributor;

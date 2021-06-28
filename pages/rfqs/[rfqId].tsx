@@ -2,7 +2,7 @@ import type { AppContext } from "next/app";
 import Router from "next/router";
 import React, { useEffect } from "react";
 import { ssrRequest } from "../../api/ssr-request";
-import { NiceButton } from "../../components/niceButton";
+import { NiceButton } from "../../components/nice-button";
 import { IUser } from "../users";
 import { IRfq } from "./";
 import { RequirementsTable } from "../../components/requirements/requirements-table";
@@ -18,6 +18,17 @@ interface ShowRfqProps {
 }
 
 const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
+  useEffect(() => {
+    console.log({ currentUser });
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
+  if (!currentUser) {
+    return <div></div>;
+  }
+
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
@@ -33,11 +44,6 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
       pm_fullname,
     } = rfq;
 
-    useEffect(() => {
-      if (!currentUser) {
-        Router.push("/");
-      }
-    });
     return (
       <div className="card ">
         <div className="card-content">
