@@ -67,6 +67,7 @@ const EditUser = ({ user, currentUser }: EditUserProps) => {
                   className={inputStyle("username")}
                   type="text"
                   value={newUsername}
+                  autoFocus
                   required
                   onChange={(e) => setUsername(e.target.value)}
                 />

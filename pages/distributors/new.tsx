@@ -49,6 +49,7 @@ const NewDistributor: React.FC<NewDistributorProps> = ({ currentUser }) => {
                   type="text"
                   value={name}
                   required
+                  autoFocus
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>

@@ -35,6 +35,7 @@ const Login = () => {
                 type="text"
                 value={email}
                 required
+                autoFocus
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>

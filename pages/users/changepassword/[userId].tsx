@@ -64,6 +64,7 @@ const EditUser = ({ user, currentUser }: EditUserProps) => {
                   className={inputStyle("password")}
                   type="password"
                   value={newPassword}
+                  autoFocus
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />

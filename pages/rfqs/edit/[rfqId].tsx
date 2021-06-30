@@ -82,6 +82,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
                     className={inputStyle("eau")}
                     type="number"
                     value={newEau}
+                    autoFocus
                     onChange={(e) => setEau(parseInt(e.target.value))}
                   />
                 </div>

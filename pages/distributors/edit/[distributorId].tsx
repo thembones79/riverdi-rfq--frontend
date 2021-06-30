@@ -66,6 +66,7 @@ const EditDistributor = ({
                     type="text"
                     value={newName}
                     required
+                    autoFocus
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>

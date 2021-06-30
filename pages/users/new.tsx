@@ -65,6 +65,7 @@ const NewUser: React.FC<NewUserProps> = ({ currentUser }) => {
                   type="text"
                   value={username}
                   required
+                  autoFocus
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>

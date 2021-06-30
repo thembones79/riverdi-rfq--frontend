@@ -88,6 +88,7 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
           <textarea
             className="textarea is-400"
             required
+            autoFocus
             name={requirement}
             value={requirement}
             onChange={(e) => setRequirement(e.target.value)}

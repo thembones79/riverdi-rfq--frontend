@@ -61,6 +61,7 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
                 <input
                   className={inputStyle("eau")}
                   type="number"
+                  autoFocus
                   value={eau}
                   onChange={(e) => setEau(parseInt(e.target.value))}
                 />
