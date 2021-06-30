@@ -12,7 +12,6 @@ interface NewRfqProps {
 
 const NewRfq = ({ currentUser }: NewRfqProps) => {
   useEffect(() => {
-    console.log({ currentUser });
     if (!currentUser) {
       Router.push("/");
     }
@@ -43,6 +42,11 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await doRequest();
+  };
+
+  const onCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    Router.push("/rfqs");
   };
 
   return (
@@ -96,6 +100,10 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
               <NiceButton>
                 <i className="far fa-check-circle"></i>
                 <span className="m-1"></span> Add RFQ
+              </NiceButton>
+              <span className="m-3"></span>
+              <NiceButton color="cancel" onClick={(event) => onCancel(event)}>
+                Cancel
               </NiceButton>
             </div>
           </form>

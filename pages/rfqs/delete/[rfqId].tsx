@@ -49,7 +49,9 @@ const DeleteRfq = ({ rfq, currentUser }: DeleteRfqProps) => {
       <div className="full-page">
         <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
-            <h1 className="title m-3">Delete {rfq_code}?</h1>
+            <h1 className="title m-3 is-4 mb-6">
+              <i className="fas fa-trash-alt mr-1"></i> Delete {rfq_code}?
+            </h1>
             <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
               <div className="m-3">
                 <div>
