@@ -24,7 +24,6 @@ type OrderType = "asc" | "desc";
 
 const RfqsTable = ({ currentUser }: RfqsTableProps) => {
   useEffect(() => {
-    console.log({ currentUser });
     if (!currentUser) {
       Router.push("/");
     }

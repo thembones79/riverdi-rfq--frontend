@@ -18,7 +18,6 @@ export const Header = ({ currentUser }: HeaderProps) => {
     currentUser && { label: "📋 RFQs", href: "/rfqs" },
     currentUser && { label: "🚀 Distributors", href: "/distributors" },
     currentUser && isAdmin && { label: "👤 Users", href: "/users" },
-    currentUser && isAdmin && { label: "Users Table", href: "/users/table" },
     currentUser && { label: "💔 Log Out", href: "/auth/logout" },
   ]
     .filter((truthyLink) => truthyLink)

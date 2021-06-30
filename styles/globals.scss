@@ -32,14 +32,15 @@ td {
   box-sizing: border-box;
 }
 
-.button.is-link.is-inverted {
+.button.is-link.is-inverted,
+.button.is-danger.is-inverted,
+.button.is-warning.is-inverted {
   background-color: transparent;
-  color: #3273dc;
-}
-
-.button.is-danger.is-inverted {
-  background-color: transparent;
-  color: #f14668;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.5);
+    background-color: transparent;
+  }
 }
 
 .tabs.is-boxed li.is-active a {

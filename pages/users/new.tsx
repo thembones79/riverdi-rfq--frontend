@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { useRequest } from "../../hooks/useRequest";
-import { IUser } from "../users";
+import { IUser } from "./";
 import { NiceButton } from "../../components/nice-button";
 
-interface SignUpProps {
+interface NewUserProps {
   currentUser: IUser;
 }
 
-const Signup: React.FC<SignUpProps> = ({ currentUser }) => {
+const NewUser: React.FC<NewUserProps> = ({ currentUser }) => {
   useEffect(() => {
     if (!currentUser) {
       Router.push("/");
@@ -45,13 +45,18 @@ const Signup: React.FC<SignUpProps> = ({ currentUser }) => {
     await doRequest();
   };
 
+  const onCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    Router.push("/users");
+  };
+
   return (
     <div>
       <div className="full-page">
         <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <form onSubmit={onSubmit}>
-              <h1 className="title m-3 is-4 mb-5">Add New User</h1>
+              <h1 className="title m-3 is-4 mb-5">👤 Add New User</h1>
 
               <div className="field m-3">
                 <label className="label">User Name</label>
@@ -65,7 +70,7 @@ const Signup: React.FC<SignUpProps> = ({ currentUser }) => {
               </div>
 
               <div className="field m-3">
-                <label className="label">Shortame</label>
+                <label className="label">Shortname</label>
                 <input
                   className={inputStyle("shortname")}
                   type="text"
@@ -135,6 +140,10 @@ const Signup: React.FC<SignUpProps> = ({ currentUser }) => {
                   <i className="far fa-check-circle"></i>
                   <span className="m-1"></span> Create User
                 </NiceButton>
+                <span className="m-3"></span>
+                <NiceButton color="cancel" onClick={(event) => onCancel(event)}>
+                  Cancel
+                </NiceButton>
               </div>
             </form>
           </div>
@@ -144,4 +153,4 @@ const Signup: React.FC<SignUpProps> = ({ currentUser }) => {
   );
 };
 
-export default Signup;
+export default NewUser;

@@ -43,12 +43,21 @@ const EditDistributor = ({
       await doRequest();
     };
 
+    const onCancel = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      event.preventDefault();
+      Router.push(`/distributors`);
+    };
+
     return currentUser ? (
       <div className="full-page">
         <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <form onSubmit={onSubmit}>
-              <h1 className="title m-3 mb-5 is-4">Edit Distributor</h1>
+              <h1 className="title m-3 mb-5 is-4">
+                <i className="fas fa-edit mr-1"></i> Edit Distributor
+              </h1>
               <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
                 <div className="field m-3">
                   <label className="label">Distributor Name</label>
@@ -69,10 +78,7 @@ const EditDistributor = ({
                   <span className="m-1"></span> Save Distributor
                 </NiceButton>
                 <span className="m-3"></span>
-                <NiceButton
-                  color="cancel"
-                  onClick={() => Router.push(`/distributors`)}
-                >
+                <NiceButton color="cancel" onClick={onCancel}>
                   Cancel
                 </NiceButton>
               </div>

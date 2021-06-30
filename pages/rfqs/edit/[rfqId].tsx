@@ -60,12 +60,21 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
       await doRequest();
     };
 
+    const onCancel = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      event.preventDefault();
+      Router.push(`/rfqs/${id}`);
+    };
+
     return (
       <div className="full-page">
         <div className="card max-w-800 m-3 big-shadow">
           <div className="card-content">
             <form onSubmit={onSubmit}>
-              <h1 className="title m-3 mb-5 is-4">Edit {rfq_code}</h1>
+              <h1 className="title m-3 mb-5 is-4">
+                <i className="fas fa-edit mr-1"></i> Edit {rfq_code}
+              </h1>
               <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
                 <div className="field m-3">
                   <label className="label">EAU</label>
@@ -117,10 +126,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
                   <span className="m-1"></span> Save RFQ
                 </NiceButton>
                 <span className="m-3"></span>
-                <NiceButton
-                  color="cancel"
-                  onClick={() => Router.push(`/rfqs/${id}`)}
-                >
+                <NiceButton color="cancel" onClick={onCancel}>
                   Cancel
                 </NiceButton>
               </div>

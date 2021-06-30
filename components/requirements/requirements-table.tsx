@@ -61,7 +61,7 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
         return (
           <th
             className={
-              column === "c / nc / cwr" || column === "" ? "is-120" : ""
+              column === "c / nc / cwr" || column === "" ? "is-120" : "p-2"
             }
             key={column}
           >
