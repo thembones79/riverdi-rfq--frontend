@@ -6,6 +6,7 @@ import { NiceButton } from "../../components/nice-button";
 import { IUser } from "../users";
 import { IRfq } from "./";
 import { RequirementsTable } from "../../components/requirements/requirements-table";
+import { SharePointLogo } from "../../icons/sharepoint-logo";
 
 interface IRfqWithNames extends IRfq {
   pm_fullname: string;
@@ -49,6 +50,21 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
           <div className="mb-3 is-flex is-flex-direction-row is-align-items-center is-justify-content-space-between is-flex-wrap-wrap">
             <h1 className="title my-3 is-4">{rfq_code}</h1>
             <div className="my-3 ">
+              <button
+                className="button is-link is-inverted"
+                onClick={() => {
+                  const win = window.open(
+                    `https://riverdi.sharepoint.com/sites/ProjectsManagementGroup/Shared Documents/RIVERDI PROJECTS/${kam}_!PROSPECTS/${rfq_code}`,
+                    "_blank"
+                  );
+                  if (win) {
+                    win.focus();
+                  }
+                }}
+              >
+                <SharePointLogo />
+              </button>
+              <span className="m-3 mr-6"></span>
               <NiceButton onClick={() => Router.push(`/rfqs/edit/${id}`)}>
                 <i className="fas fa-edit"></i>
               </NiceButton>
