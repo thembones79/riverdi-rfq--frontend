@@ -11,6 +11,8 @@ import { SharePointLogo } from "../../icons/sharepoint-logo";
 interface IRfqWithNames extends IRfq {
   pm_fullname: string;
   kam_fullname: string;
+  clickup_id: string;
+  status: string;
 }
 
 interface ShowRfqProps {
@@ -36,6 +38,8 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
       rfq_code,
       eau,
       customer,
+      clickup_id,
+      status,
       distributor,
       pm,
       kam,
@@ -44,11 +48,39 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
       pm_fullname,
     } = rfq;
 
+    const formatStatus = () => {
+      if (status === "awaiting customer feedback") {
+        return "is-warning";
+      } else if (status === "complete") {
+        return "is-success";
+      } else {
+        return "is-link";
+      }
+    };
+
     return (
       <div className="card ">
         <div className="card-content">
           <div className="mb-3 is-flex is-flex-direction-row is-align-items-center is-justify-content-space-between is-flex-wrap-wrap">
-            <h1 className="title my-3 is-4">{rfq_code}</h1>
+            <div className="is-flex is-flex-wrap-wrap">
+              <h1 className="title my-3 is-4">{rfq_code}</h1>{" "}
+              <span className="m-3 "></span>
+              <button
+                className={`button ${formatStatus()} is-light m-4`}
+                onClick={() => {
+                  const win = window.open(
+                    `https://app.clickup.com/t/${clickup_id}`,
+                    "_blank"
+                  );
+                  if (win) {
+                    win.focus();
+                  }
+                }}
+              >
+                {status}
+              </button>
+            </div>
+
             <div className="my-3 ">
               <button
                 className="button is-link is-inverted"
@@ -64,6 +96,7 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
               >
                 <SharePointLogo />
               </button>
+
               <span className="m-3 mr-6"></span>
               <NiceButton onClick={() => Router.push(`/rfqs/edit/${id}`)}>
                 <i className="fas fa-edit"></i>
