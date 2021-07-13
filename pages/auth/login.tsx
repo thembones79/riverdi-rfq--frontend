@@ -32,6 +32,7 @@ const Login = () => {
               <label className="label">Email Address</label>
               <input
                 className={inputStyle("email")}
+                name="email"
                 type="text"
                 value={email}
                 required
@@ -45,6 +46,7 @@ const Login = () => {
               <input
                 className={inputStyle("password")}
                 type="password"
+                name="password"
                 value={password}
                 required
                 onChange={(e) => setPassword(e.target.value)}
