@@ -71,7 +71,7 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
             className="textarea is-400"
             required
             autoFocus
-            name={requirement}
+            name="requirement"
             value={requirement}
             onChange={(e) => setRequirement(e.target.value)}
           />
@@ -80,7 +80,7 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
           <label className="label">c / nc / cwr</label>
           <div className={`select `}>
             <select
-              name={cnccwr}
+              name="cnccwr"
               id={cnccwr}
               value={cnccwr}
               required
@@ -99,7 +99,7 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
           <label className="label">note</label>
           <textarea
             className="textarea is-400"
-            name={note}
+            name="note"
             value={note}
             onChange={(e) => setNote(e.target.value)}
             rows={10}

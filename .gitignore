@@ -32,3 +32,13 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# cypress
+screenshots
+videos
+example.json
+profile.json
+users.json
+1-getting-started
+2-advanced-examples
+credentials.js

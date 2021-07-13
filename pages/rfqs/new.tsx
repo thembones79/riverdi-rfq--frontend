@@ -65,6 +65,7 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
           <label className="label">EAU</label>
           <input
             className={inputStyle("eau")}
+            name="eau"
             type="number"
             autoFocus
             value={eau}
