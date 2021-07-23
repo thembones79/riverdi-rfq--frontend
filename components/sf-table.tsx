@@ -76,13 +76,17 @@ export const SfTable = <T extends { id: number }>(props: SfTableProps<T>) => {
   };
 
   const getFilteredTable = () => {
-    return rows.filter(hasInputs);
+    return rows.filter(includesAllTheDataFromInputs);
   };
 
-  function hasInputs(element: Object, index: number, array: Object[]) {
+  function includesAllTheDataFromInputs(
+    element: Object,
+    index: number,
+    array: Object[]
+  ) {
     const inputs = Object.entries(inputValues);
 
-    let i = 0;
+    let validInputs = 0;
 
     inputs.forEach((entry) => {
       const [key, value] = entry;
@@ -95,11 +99,11 @@ export const SfTable = <T extends { id: number }>(props: SfTableProps<T>) => {
           //@ts-ignore
           .includes(value.toString().toLowerCase())
       ) {
-        i++;
+        validInputs++;
       }
     });
 
-    return i === inputs.length;
+    return validInputs === inputs.length;
   }
 
   const renderInputs = () => {
@@ -133,8 +137,9 @@ export const SfTable = <T extends { id: number }>(props: SfTableProps<T>) => {
   const renderTableBody = () => {
     if (dataTable.length > 0) {
       return dataTable.map((row) => {
+        const { id } = row;
         return (
-          <tr key={row.id} onClick={() => Router.push(`/`)}>
+          <tr key={id} onClick={() => Router.push(`/rfqs/${id}`)}>
             {columnNames.map((columnName, idx) => (
               <td key={idx}>{row[columnName]}</td>
             ))}
@@ -147,12 +152,12 @@ export const SfTable = <T extends { id: number }>(props: SfTableProps<T>) => {
   useEffect(() => filterItems(), [inputValues]);
 
   return (
-    <table>
+    <table className="table is-striped is-narrow is-hoverable is-fullwidth is-size-7">
       <thead>
         <tr>{renderInputs()}</tr>
         <tr>{renderTableHeader()}</tr>
       </thead>
-      <tbody>{renderTableBody()}</tbody>
+      <tbody className="fixed200 ">{renderTableBody()}</tbody>
     </table>
   );
 };

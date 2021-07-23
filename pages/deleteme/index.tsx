@@ -1,41 +1,62 @@
+import React, { useState, useEffect } from "react";
+import Router from "next/router";
+import { IUser } from "../users";
+import { useRequest } from "../../hooks/useRequest";
+
 import { IColumn, SfTable } from "../../components/sf-table";
+
+interface DeleteMeProps {
+  currentUser: IUser;
+}
 
 export interface IRfq {
   id: number;
   rfq_code: string;
   eau: number;
   customer: string;
+  distributor: string;
+  pm: string;
+  kam: string;
+  updated: string;
 }
 
 const columns: IColumn<IRfq>[] = [
   { name: "rfq_code", label: "RFQ Code" },
   { name: "eau", label: "EAU" },
   { name: "customer", label: "Customer" },
+  { name: "distributor", label: "Distributor" },
+  { name: "pm", label: "PM" },
+  { name: "kam", label: "KAM" },
+  { name: "updated", label: "Updated" },
 ];
 
-const data = [
-  { id: 1, rfq_code: "valueZ", eau: 99, customer: "valueP" },
-  { id: 2, rfq_code: "valueY", eau: 88, customer: "valueR" },
-  { id: 3, rfq_code: "valueX", eau: 77, customer: "valueQ" },
-  { id: 4, rfq_code: "valueX", eau: 99, customer: "valueP" },
-  { id: 5, rfq_code: "valueY", eau: 88, customer: "valueQ" },
-  { id: 6, rfq_code: "valueZ", eau: 77, customer: "valueR" },
-  { id: 7, rfq_code: "valueZ", eau: 99, customer: "valueP" },
-  { id: 8, rfq_code: "valueY", eau: 88, customer: "valueQ" },
-  { id: 9, rfq_code: "valueX", eau: 77, customer: "valueR" },
-  { id: 10, rfq_code: "valueX", eau: 99, customer: "valueP" },
-  { id: 11, rfq_code: "valueY", eau: 88, customer: "valueR" },
-  { id: 12, rfq_code: "valueZ", eau: 77, customer: "valueQ" },
-  { id: 13, rfq_code: "valueY", eau: 99, customer: "valueQ" },
-  { id: 14, rfq_code: "valueZ", eau: 88, customer: "valueP" },
-  { id: 15, rfq_code: "valueX", eau: 77, customer: "valueR" },
-  { id: 16, rfq_code: "valueX77", eau: 77, customer: "valueR77" },
-];
+const DeleteMe = ({ currentUser }: DeleteMeProps) => {
+  if (!currentUser) {
+    useEffect(() => {
+      Router.push("/");
+    });
+    return <div></div>;
+  }
 
-const DeleteMe = () => (
-  <div>
-    <SfTable columns={columns} rows={data} />
-  </div>
-);
+  const [rows, setRows] = useState<IRfq[]>([]);
+  const { doRequest, errorsJSX } = useRequest({
+    url: "/rfqs",
+    method: "get",
+    onSuccess: (rfqs: IRfq[]) => setRows(rfqs),
+  });
+
+  useEffect(() => {
+    doRequest();
+  }, []);
+
+  return (
+    rows.length > 0 && (
+      <div className="table-container">
+        <SfTable columns={columns} rows={rows} />
+        {errorsJSX()}
+      </div>
+    )
+  );
+};
 
 export default DeleteMe;
