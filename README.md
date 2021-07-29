@@ -23,18 +23,6 @@
 - SharePoint Integration (creating specified folder structure, puting files)
 - ClickUp Integration (creating tasks, assigning people, fetching task statuses)
 
-## Data Model
-
-![Data Model](static/riverdiRfqDataModel.png)
-
-## Migrations
-
-In order to tie the database structure to the code (helpful when working with other engineers) I had to use **`schema migrations`** (_code that describes a precise change to make to the database_).
-
-The tool of the choice is [node-pg-migrate](https://github.com/salsita/node-pg-migrate). All migratrons are written in plain SQL.
-
-> What are **`schema migrations`** and how to use **node-pg-migrate** is out of the scope of this document.
-
 ## Data Layer Logic
 
 I've created separate layer of utility methods to handle database operations.
