@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { by } from "../../utils/by";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../nice-button";
 import { IRequirement } from "./requirements-table";
@@ -7,8 +8,8 @@ interface EditRequirementProps {
   id: number;
   idx: number;
   rfq_id: number;
-  oldCnccwr: string;
   oldRequirement: string;
+  oldPriority: number;
   oldNote: string;
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   requirementsTable: IRequirement[];
@@ -19,23 +20,24 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
   id,
   idx,
   rfq_id,
-  oldCnccwr,
   oldRequirement,
+  oldPriority,
   oldNote,
   setIsModalActive,
   requirementsTable,
   setRequirementsTable,
 }) => {
-  const [cnccwr, setCnccwr] = useState("oldCnccwr");
+  const [priority, setPriority] = useState(oldPriority);
   const [requirement, setRequirement] = useState("oldRequirement");
   const [note, setNote] = useState("oldNote");
-  const { doRequest, errorsJSX } = useRequest({
+  const { doRequest, errorsJSX, inputStyle } = useRequest({
     url: `/requirements/${id}`,
     method: "put",
     body: {
       rfq_id,
-      c_nc_cwr: cnccwr,
+      c_nc_cwr: "c",
       requirement,
+      priority,
       note,
     },
     onSuccess: (r: IRequirement) => onSuccessAction(r, idx),
@@ -52,7 +54,6 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
   };
 
   const resetForm = () => {
-    setCnccwr("");
     setRequirement("");
     setNote("");
   };
@@ -63,26 +64,42 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
     newTable[idx] = {
       id: r.id,
       rfq_id,
-      c_nc_cwr: cnccwr,
+      c_nc_cwr: "c",
       requirement,
+      priority,
       note,
     };
 
-    setRequirementsTable(newTable);
+    console.log({ newTable });
+
+    const sortedRequirementsTable = newTable.sort(by("priority"));
+    console.log({ E: sortedRequirementsTable });
+
+    setRequirementsTable(sortedRequirementsTable);
 
     resetForm();
     setIsModalActive(false);
   };
 
   useEffect(() => {
-    setCnccwr(oldCnccwr);
-    setRequirement(() => oldRequirement);
+    setRequirement(oldRequirement);
+    setPriority(oldPriority);
     setNote(oldNote);
   }, [id]);
 
   return (
     <form onSubmit={onSubmit}>
       <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
+        <div className="field m-3">
+          <label className="label">order</label>
+          <input
+            className={inputStyle("priority")}
+            name="priority"
+            type="number"
+            value={priority}
+            onChange={(e) => setPriority(parseInt(e.target.value))}
+          />
+        </div>
         <div className="field m-3">
           <label className="label">requirement</label>
           <textarea
@@ -93,25 +110,6 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
             value={requirement}
             onChange={(e) => setRequirement(e.target.value)}
           />
-        </div>
-        <div className="field m-3">
-          <label className="label">c / nc / cwr</label>
-          <div className={`select `}>
-            <select
-              name={cnccwr}
-              id={cnccwr}
-              value={cnccwr}
-              required
-              onChange={(e) => {
-                setCnccwr(e.target.value);
-              }}
-            >
-              <option></option>
-              <option value="c">c</option>
-              <option value="nc">nc</option>
-              <option value="cwr">cwr</option>
-            </select>
-          </div>
         </div>
         <div className="field m-3">
           <label className="label">note</label>

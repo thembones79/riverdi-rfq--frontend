@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { by } from "../../utils/by";
 import { useRequest } from "../../hooks/useRequest";
 import { NiceButton } from "../nice-button";
 import { IRequirement } from "./requirements-table";
@@ -16,16 +17,17 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
   requirementsTable,
   setRequirementsTable,
 }) => {
-  const [cnccwr, setCnccwr] = useState("");
   const [requirement, setRequirement] = useState("");
   const [note, setNote] = useState("");
+  const [priority, setPriority] = useState(0);
   const { doRequest, errorsJSX, inputStyle } = useRequest({
     url: "/requirements",
     method: "post",
     body: {
       rfq_id,
-      c_nc_cwr: cnccwr,
+      c_nc_cwr: "c",
       requirement,
+      priority,
       note,
     },
     onSuccess: (r: IRequirement) => onSuccessAction(r),
@@ -42,22 +44,29 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
   };
 
   const resetForm = () => {
-    setCnccwr("");
+    setPriority(0);
     setRequirement("");
     setNote("");
   };
 
   const onSuccessAction = (r: IRequirement) => {
-    setRequirementsTable([
+    const newRequirementsTable = [
       ...requirementsTable,
       {
         id: r.id,
         rfq_id,
-        c_nc_cwr: cnccwr,
+        c_nc_cwr: "c",
         requirement,
         note,
+        priority,
       },
-    ]);
+    ];
+
+    console.log({ newRequirementsTable });
+
+    const sortedRequirementsTable = newRequirementsTable.sort(by("priority"));
+    console.log({ N: sortedRequirementsTable });
+    setRequirementsTable(sortedRequirementsTable);
     resetForm();
     setIsModalActive(false);
   };
@@ -65,6 +74,16 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
   return (
     <form onSubmit={onSubmit}>
       <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
+        <div className="field m-3">
+          <label className="label">order</label>
+          <input
+            className={inputStyle("priority")}
+            name="priority"
+            type="number"
+            value={priority}
+            onChange={(e) => setPriority(parseInt(e.target.value))}
+          />
+        </div>
         <div className="field m-3">
           <label className="label">requirement</label>
           <textarea
@@ -76,25 +95,7 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
             onChange={(e) => setRequirement(e.target.value)}
           />
         </div>
-        <div className="field m-3">
-          <label className="label">c / nc / cwr</label>
-          <div className={`select `}>
-            <select
-              name="cnccwr"
-              id={cnccwr}
-              value={cnccwr}
-              required
-              onChange={(e) => {
-                setCnccwr(e.target.value);
-              }}
-            >
-              <option></option>
-              <option value="c">c</option>
-              <option value="nc">nc</option>
-              <option value="cwr">cwr</option>
-            </select>
-          </div>
-        </div>
+
         <div className="field m-3">
           <label className="label">note</label>
           <textarea

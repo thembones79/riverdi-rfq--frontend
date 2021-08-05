@@ -13,6 +13,11 @@ interface IRfqWithIds extends IRfq {
   distributor_id: number;
   pm_id: number;
   kam_id: number;
+  final_solutions: string;
+  conclusions: string;
+  samples_expected: string;
+  mp_expected: string;
+  eau_max: number;
 }
 
 interface EditRfqProps {
@@ -34,14 +39,31 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
   if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
-    const { rfq_code, eau, customer_id, distributor_id, pm_id, kam_id, id } =
-      rfq;
+    const {
+      rfq_code,
+      eau,
+      customer_id,
+      distributor_id,
+      pm_id,
+      kam_id,
+      id,
+      final_solutions,
+      conclusions,
+      samples_expected,
+      mp_expected,
+      eau_max,
+    } = rfq;
 
     const [newEau, setEau] = useState(eau);
     const [newCustomerId, setCustomerId] = useState(customer_id);
     const [newDistributorId, setDistributorId] = useState(distributor_id);
     const [newPmId, setPmId] = useState(pm_id);
     const [newKamId, setKamId] = useState(kam_id);
+    const [newFinalSolutions, setFinalSolutions] = useState(final_solutions);
+    const [newConclusions, setConclusions] = useState(conclusions);
+    const [newSamplesExpected, setSamplesExpected] = useState(samples_expected);
+    const [newMpExpected, setMpExpected] = useState(mp_expected);
+    const [newEauMax, setEauMax] = useState(eau_max);
     const { doRequest, errorsJSX, inputStyle } = useRequest({
       url: `/rfqs/${id}`,
       method: "put",
@@ -51,6 +73,11 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
         distributor_id: newDistributorId,
         pm_id: newPmId,
         kam_id: newKamId,
+        final_solutions: newFinalSolutions,
+        conclusions: newConclusions,
+        samples_expected: newSamplesExpected,
+        mp_expected: newMpExpected,
+        eau_max: newEauMax,
       },
       onSuccess: () => Router.push(`/rfqs/${id}`),
     });
@@ -69,7 +96,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
 
     return (
       <div className="full-page">
-        <div className="card max-w-800 m-3 big-shadow">
+        <div className="card max-w-900 m-3 big-shadow">
           <div className="card-content">
             <form onSubmit={onSubmit}>
               <h1 className="title m-3 mb-5 is-4">
@@ -77,13 +104,26 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
               </h1>
               <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
                 <div className="field m-3">
-                  <label className="label">EAU</label>
+                  <label className="label">EAU min</label>
                   <input
                     className={inputStyle("eau")}
+                    name="eau"
                     type="number"
-                    value={newEau}
+                    required
                     autoFocus
+                    value={newEau}
                     onChange={(e) => setEau(parseInt(e.target.value))}
+                  />
+                </div>
+
+                <div className="field m-3">
+                  <label className="label">EAU max</label>
+                  <input
+                    className={inputStyle("eau_max")}
+                    name="eau_max"
+                    type="number"
+                    value={newEauMax}
+                    onChange={(e) => setEauMax(parseInt(e.target.value))}
                   />
                 </div>
 
@@ -118,6 +158,47 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
                   fetch="/users"
                   initialValue={newKamId}
                 />
+
+                <div className="field m-3">
+                  <label className="label">Samples Expected</label>
+                  <input
+                    className={inputStyle("samples_expected")}
+                    type="text"
+                    value={newSamplesExpected}
+                    onChange={(e) => setSamplesExpected(e.target.value)}
+                  />
+                </div>
+
+                <div className="field m-3">
+                  <label className="label">MP Expected</label>
+                  <input
+                    className={inputStyle("mp_expected")}
+                    type="text"
+                    value={newMpExpected}
+                    onChange={(e) => setMpExpected(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
+                <div className="field m-3">
+                  <label className="label">Final Solutions</label>
+                  <textarea
+                    className="textarea is-400"
+                    name="final_solutions"
+                    value={newFinalSolutions}
+                    onChange={(e) => setFinalSolutions(e.target.value)}
+                  />
+                </div>
+
+                <div className="field m-3">
+                  <label className="label">Conclusions</label>
+                  <textarea
+                    className="textarea is-400"
+                    name="conclusions"
+                    value={newConclusions}
+                    onChange={(e) => setConclusions(e.target.value)}
+                  />
+                </div>
               </div>
 
               {errorsJSX()}

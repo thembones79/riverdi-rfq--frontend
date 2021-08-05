@@ -27,6 +27,12 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
   const [distributorId, setDistributorId] = useState(0);
   const [pmId, setPmId] = useState(0);
   const [kamId, setKamId] = useState(0);
+  const [finalSolutions, setFinalSolutions] = useState("");
+  const [conclusions, setConclusions] = useState("");
+  const [samplesExpected, setSamplesExpected] = useState("");
+  const [mpExpected, setMpExpected] = useState("");
+  const [eauMax, setEauMax] = useState(0);
+  const [extraNote, setExtraNote] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { doRequest, errorsJSX, inputStyle } = useRequest({
     url: "/rfqs",
@@ -37,6 +43,12 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
       distributor_id: distributorId,
       pm_id: pmId,
       kam_id: kamId,
+      final_solutions: finalSolutions,
+      conclusions,
+      samples_expected: samplesExpected,
+      mp_expected: mpExpected,
+      eau_max: eauMax,
+      extra_note: extraNote,
     },
     onSuccess: (rfq: IRfq) => onSuccess(rfq),
   });
@@ -62,14 +74,36 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
       <h1 className="title m-3 mb-5">🎯 New RFQ</h1>
       <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
         <div className="field m-3">
-          <label className="label">EAU</label>
+          <label className="label">Extra Note besides RFQ Code</label>
+          <input
+            className={inputStyle("extra_note")}
+            type="text"
+            value={extraNote}
+            autoFocus
+            onChange={(e) => setExtraNote(e.target.value)}
+          />
+        </div>
+
+        <div className="field m-3">
+          <label className="label">EAU min</label>
           <input
             className={inputStyle("eau")}
             name="eau"
             type="number"
-            autoFocus
+            required
             value={eau}
             onChange={(e) => setEau(parseInt(e.target.value))}
+          />
+        </div>
+
+        <div className="field m-3">
+          <label className="label">EAU max</label>
+          <input
+            className={inputStyle("eau_max")}
+            name="eau_max"
+            type="number"
+            value={eauMax}
+            onChange={(e) => setEauMax(parseInt(e.target.value))}
           />
         </div>
 
@@ -100,6 +134,46 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
           fieldname="kamId"
           fetch="/users"
         />
+
+        <div className="field m-3">
+          <label className="label">Samples Expected</label>
+          <input
+            className={inputStyle("samples_expected")}
+            type="text"
+            value={samplesExpected}
+            onChange={(e) => setSamplesExpected(e.target.value)}
+          />
+        </div>
+
+        <div className="field m-3">
+          <label className="label">MP Expected</label>
+          <input
+            className={inputStyle("mp_expected")}
+            type="text"
+            value={mpExpected}
+            onChange={(e) => setMpExpected(e.target.value)}
+          />
+        </div>
+
+        <div className="field m-3">
+          <label className="label">Final Solutions</label>
+          <textarea
+            className="textarea is-400"
+            name="final_solutions"
+            value={finalSolutions}
+            onChange={(e) => setFinalSolutions(e.target.value)}
+          />
+        </div>
+
+        <div className="field m-3">
+          <label className="label">Conclusions</label>
+          <textarea
+            className="textarea is-400"
+            name="conclusions"
+            value={conclusions}
+            onChange={(e) => setConclusions(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className="m-3 mt-6 ">
@@ -126,7 +200,7 @@ const NewRfq = ({ currentUser }: NewRfqProps) => {
 
   return (
     <div className="full-page">
-      <div className="card max-w-800 m-3 big-shadow">
+      <div className="card max-w-900 m-3 big-shadow">
         <div className="card-content">
           {isLoading ? renderLoader() : renderContent()}
 
