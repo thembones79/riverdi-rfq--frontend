@@ -12,6 +12,7 @@ export interface IRequirement {
   c_nc_cwr: string;
   requirement: string;
   note: string;
+  priority: number;
 }
 
 export interface RequirementsTableProps {
@@ -56,15 +57,10 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
 
   const renderTableHeader = () => {
     if (requirementsTable.length > 0) {
-      const columns = ["requirement", "c / nc / cwr", "note", ""];
+      const columns = ["priority", "requirement", "note", ""];
       return columns.map((column) => {
         return (
-          <th
-            className={
-              column === "c / nc / cwr" || column === "" ? "is-120" : "p-2"
-            }
-            key={column}
-          >
+          <th className={column === "" ? "is-120" : "p-2"} key={column}>
             {column}
           </th>
         );
@@ -74,16 +70,24 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
 
   const renderTableBody = () => {
     return requirementsTable.map((r, idx) => {
-      const { c_nc_cwr, requirement, note, id } = r;
+      const { c_nc_cwr, requirement, note, id, priority } = r;
       return (
         <tr key={id}>
+          <td className="p-2">{priority}</td>
           <td className="p-2">{requirement}</td>
-          <td className="is-120 p-2">{c_nc_cwr}</td>
           <td className="p-2">{note}</td>
           <td className="is-120 p-2">
             <button
               onClick={() => {
-                handleEditReq({ c_nc_cwr, requirement, note, id, idx, rfq_id });
+                handleEditReq({
+                  c_nc_cwr,
+                  requirement,
+                  note,
+                  id,
+                  idx,
+                  rfq_id,
+                  priority,
+                });
               }}
               className="button is-link is-inverted is-rounded is-small mx-1 p-3"
             >
@@ -104,12 +108,12 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
   };
 
   const handleEditReq = ({
-    c_nc_cwr,
     requirement,
     note,
     id,
     idx,
     rfq_id,
+    priority,
   }: IHandleEditReq) => {
     setModalBody(
       <EditRequirement
@@ -119,9 +123,9 @@ export const RequirementsTable: React.FC<RequirementsTableProps> = ({
         setRequirementsTable={setRequirementsTable}
         id={id}
         idx={idx}
-        oldCnccwr={c_nc_cwr}
         oldRequirement={requirement}
         oldNote={note}
+        oldPriority={priority}
       />
     );
 

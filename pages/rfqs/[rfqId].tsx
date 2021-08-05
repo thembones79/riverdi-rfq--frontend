@@ -13,6 +13,11 @@ interface IRfqWithNames extends IRfq {
   kam_fullname: string;
   clickup_id: string;
   status: string;
+  final_solutions: string;
+  conclusions: string;
+  samples_expected: string;
+  mp_expected: string;
+  eau_max: number;
 }
 
 interface ShowRfqProps {
@@ -46,6 +51,11 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
       id,
       kam_fullname,
       pm_fullname,
+      final_solutions,
+      conclusions,
+      samples_expected,
+      mp_expected,
+      eau_max,
     } = rfq;
 
     const formatStatus = () => {
@@ -113,8 +123,13 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
 
           <div className="is-flex is-flex-direction-row is-justify-content-space-between is-flex-wrap-wrap">
             <div className="field m-3">
-              <label className="label">EAU</label>
+              <label className="label">EAU min</label>
               <div>{eau}</div>
+            </div>
+
+            <div className="field m-3">
+              <label className="label">EAU max</label>
+              <div>{eau_max}</div>
             </div>
 
             <div className="field m-3">
@@ -137,10 +152,31 @@ const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
                 {kam_fullname} ({kam})
               </div>
             </div>
+
+            <div className="field m-3">
+              <label className="label">Samples Expected</label>
+              <div>{samples_expected}</div>
+            </div>
+
+            <div className="field m-3">
+              <label className="label">MP Expected</label>
+              <div>{mp_expected}</div>
+            </div>
           </div>
         </div>
 
         <RequirementsTable rfq_id={id} />
+        <div className="is-flex is-flex-direction-row is-justify-content-space-between is-flex-wrap-wrap">
+          <div className="field m-5">
+            <label className="label">Final Solutions</label>
+            <div>{final_solutions}</div>
+          </div>
+
+          <div className="field m-5">
+            <label className="label">Conclusions</label>
+            <div>{conclusions}</div>
+          </div>
+        </div>
       </div>
     );
   }
