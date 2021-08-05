@@ -26,12 +26,6 @@ interface ShowRfqProps {
 }
 
 const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
-  useEffect(() => {
-    if (!currentUser) {
-      Router.push("/");
-    }
-  });
-
   if (!currentUser) {
     return <div></div>;
   }
