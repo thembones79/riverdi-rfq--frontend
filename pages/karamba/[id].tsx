@@ -12,7 +12,6 @@ const Page: NextPage<Props> = ({ userAgent, u }) => (
     <p>Your user agent: {userAgent}</p>
 
     <button onClick={() => Router.push("/karamba/5")}>Click</button>
-    <p>Your user agent: {u.username}</p>
   </main>
 );
 
