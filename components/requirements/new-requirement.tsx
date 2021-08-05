@@ -62,10 +62,8 @@ export const NewRequirement: React.FC<NewRequirementProps> = ({
       },
     ];
 
-    console.log({ newRequirementsTable });
-
     const sortedRequirementsTable = newRequirementsTable.sort(by("priority"));
-    console.log({ N: sortedRequirementsTable });
+
     setRequirementsTable(sortedRequirementsTable);
     resetForm();
     setIsModalActive(false);

@@ -70,10 +70,7 @@ export const EditRequirement: React.FC<EditRequirementProps> = ({
       note,
     };
 
-    console.log({ newTable });
-
     const sortedRequirementsTable = newTable.sort(by("priority"));
-    console.log({ E: sortedRequirementsTable });
 
     setRequirementsTable(sortedRequirementsTable);
 
