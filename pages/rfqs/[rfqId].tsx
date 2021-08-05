@@ -21,11 +21,22 @@ interface IRfqWithNames extends IRfq {
 }
 
 interface ShowRfqProps {
-  data: IRfqWithNames;
+  rfq: IRfqWithNames;
+  currentUser: IUser;
 }
 
-const ShowRfq = ({ data }: ShowRfqProps) => {
-  if (!data) {
+const ShowRfq = ({ rfq, currentUser }: ShowRfqProps) => {
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    }
+  });
+
+  if (!currentUser) {
+    return <div></div>;
+  }
+
+  if (!rfq) {
     return <h1>RFQ not found</h1>;
   } else {
     const {
@@ -45,7 +56,7 @@ const ShowRfq = ({ data }: ShowRfqProps) => {
       samples_expected,
       mp_expected,
       eau_max,
-    } = data;
+    } = rfq;
 
     const formatStatus = () => {
       if (status === "awaiting customer feedback") {
@@ -171,11 +182,11 @@ const ShowRfq = ({ data }: ShowRfqProps) => {
   }
 };
 
-export async function getServerSideProps(ctx: AppContext["ctx"]) {
+ShowRfq.getInitialProps = async (ctx: AppContext["ctx"]) => {
   const { rfqId } = ctx.query;
   const url = `/rfqs/${rfqId}`;
   const { data } = await ssrRequest(ctx, url);
-  return { props: { data } };
-}
+  return { rfq: data };
+};
 
 export default ShowRfq;
