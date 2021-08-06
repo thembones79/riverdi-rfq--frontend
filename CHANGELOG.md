@@ -9,7 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🔥 Added
 
-- TODO
+- change `eau` -> `eau min` (mandatory) + `eau max` (optional) for `NewRfq`, `ShowRfq` and `EditRfq` pages
+- remove `c/nc/nwr` from frontend for `NewRfq`, `ShowRfq` and `EditRfq` pages
+- add requirements `order` feature for `NewRequirement`, `ShowRequirement` and `EditRequirement` components
+- add `final solutions` notes textarea and `conclusions` notes textarea for `NewRfq`, `ShowRfq` and `EditRfq` pages
+- add `samples expected` and `mp expected` text fields for `NewRfq`, `ShowRfq` and `EditRfq` pages
+- add `extra_note` field to add after `rfq_code` in **Clickup** task for `NewRfq` page
+- refactor `ShowRfq` page to be **Client Side Rendered** instead of **Server Side Rendered** (fix issue with deep links to app on Vercel cloud server)
+- integration & e2e tests for the new features
 
 ## [1.4.0] - 2021-07-24
 

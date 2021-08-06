@@ -47,5 +47,10 @@ Cypress.Commands.add("createRfq", () => {
     distributor_id: 1,
     pm_id: 25,
     kam_id: 25,
+    final_solutions: "final",
+    conclusions: "my thoughts",
+    samples_expected: "someday",
+    mp_expected: "someday",
+    eau_max: 3330000,
   });
 });

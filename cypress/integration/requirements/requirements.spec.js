@@ -33,8 +33,6 @@ describe("Requirements", () => {
 
       // fill out the form
 
-      cy.get("select[name=cnccwr]").select("c");
-      cy.get("select[name=cnccwr]").should("have.value", "c");
       cy.get("textarea[name=requirement]").type(requirementText);
       cy.get("textarea[name=note]").type(noteText);
       cy.contains("Add Requirement").click();
