@@ -12,6 +12,7 @@ interface RfqsTableProps {
 export interface IRfq {
   id: number;
   rfq_code: string;
+  extra_note: string;
   eau: number;
   customer: string;
   distributor: string;
@@ -22,6 +23,7 @@ export interface IRfq {
 
 const columns: IColumn<IRfq>[] = [
   { name: "rfq_code", label: "RFQ Code" },
+  { name: "extra_note", label: "Extra Note" },
   { name: "eau", label: "EAU" },
   { name: "customer", label: "Customer" },
   { name: "distributor", label: "Distributor" },

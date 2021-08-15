@@ -31,6 +31,7 @@ const ShowRfq: React.FC = () => {
   const [rfq, setRfq] = useState<IRfqWithNames>({
     id: 1,
     rfq_code: "LOADING",
+    extra_note: "ppp",
     eau: 5,
     customer: "pupa",
     distributor: "pupa",
@@ -59,6 +60,7 @@ const ShowRfq: React.FC = () => {
   } else {
     const {
       rfq_code,
+      extra_note,
       eau,
       customer,
       clickup_id,
@@ -99,7 +101,9 @@ const ShowRfq: React.FC = () => {
         <div className="card-content">
           <div className="mb-3 is-flex is-flex-direction-row is-align-items-center is-justify-content-space-between is-flex-wrap-wrap">
             <div className="is-flex is-flex-wrap-wrap">
-              <h1 className="title my-3 is-4">{rfq_code}</h1>{" "}
+              <h1 className="title my-3 is-4">
+                {rfq_code} {extra_note}
+              </h1>{" "}
               <span className="m-3 "></span>
               <button
                 className={`button ${formatStatus()} is-light m-4`}
