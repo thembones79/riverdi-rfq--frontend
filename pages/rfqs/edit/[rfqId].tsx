@@ -41,6 +41,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
   } else {
     const {
       rfq_code,
+      extra_note,
       eau,
       customer_id,
       distributor_id,
@@ -54,6 +55,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
       eau_max,
     } = rfq;
 
+    const [newExtraNote, setExtraNote] = useState(extra_note);
     const [newEau, setEau] = useState(eau);
     const [newCustomerId, setCustomerId] = useState(customer_id);
     const [newDistributorId, setDistributorId] = useState(distributor_id);
@@ -68,6 +70,7 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
       url: `/rfqs/${id}`,
       method: "put",
       body: {
+        extra_note: newExtraNote,
         eau: newEau,
         customer_id: newCustomerId,
         distributor_id: newDistributorId,
@@ -103,6 +106,17 @@ const EditRfq = ({ rfq, currentUser }: EditRfqProps) => {
                 <i className="fas fa-edit mr-1"></i> Edit {rfq_code}
               </h1>
               <div className="is-flex is-flex-direction-row is-flex-wrap-wrap">
+                <div className="field m-3">
+                  <label className="label">Extra Note</label>
+                  <input
+                    className={inputStyle("extra_note")}
+                    type="text"
+                    value={newExtraNote}
+                    autoFocus
+                    onChange={(e) => setExtraNote(e.target.value)}
+                  />
+                </div>
+
                 <div className="field m-3">
                   <label className="label">EAU min</label>
                   <input
